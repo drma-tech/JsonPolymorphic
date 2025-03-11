@@ -9,7 +9,7 @@ namespace JsonPolymorphic;
 [JsonDerivedType(typeof(ItemTypeItem), (int)CompositionRole.Item)]
 [JsonDerivedType(typeof(ItemTypeComponent), (int)CompositionRole.Component)]
 [Table(nameof(ItemType))]
-public abstract class ItemType : ModelBase
+public abstract class ItemType
 {
     [Key]
     public int ItemTypeId { get; set; }
@@ -21,15 +21,6 @@ public abstract class ItemType : ModelBase
     public CompositionRole Role { get; set; }
 
     public virtual ICollection<ItemModel> ItemModels { get; set; } = [];
-
-    [JsonIgnore]
-    public override bool IsNew => ItemTypeId == 0;
-
-    [JsonIgnore]
-    public override int IdentificationId { get => ItemTypeId; }
-
-    [JsonIgnore]
-    public override string? IdentificationName { get => Description; }
 }
 
 public partial class ItemTypeItem : ItemType

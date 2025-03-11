@@ -11,7 +11,7 @@ var services = new ServiceCollection()
 using var dbContext = services.GetRequiredService<MyDbContext>();
 
 var type = new ItemTypeItem { Description = "type 01", Role = CompositionRole.Item };
-var model = new ItemModelItem { ShortDescription = "model 01", Description = "model 01", ItemType = type, Role = CompositionRole.Item };
+var model = new ItemModelItem { ShortDescription = "model 01", ItemType = type, Role = CompositionRole.Item };
 var item = new Item { SerialNumber = "12345", ItemModel = model };
 
 model.ItemType = type;

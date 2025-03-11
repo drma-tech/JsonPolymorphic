@@ -9,7 +9,7 @@ namespace ppe.shared.Models;
 [JsonDerivedType(typeof(ItemModelItem), (int)CompositionRole.Item)]
 [JsonDerivedType(typeof(ItemModelComponent), (int)CompositionRole.Component)]
 [Table(nameof(ItemModel))]
-public abstract class ItemModel : ModelBase
+public abstract class ItemModel
 {
     [Key]
     public int ItemModelId { get; set; }
@@ -18,12 +18,7 @@ public abstract class ItemModel : ModelBase
 
     public string? ShortDescription { get; set; }
 
-    public string? Description { get; set; }
-
     public virtual ItemType? ItemType { get; set; }
-
-    [Display(Name = "Schema Data")]
-    public string? JsonData { get; set; }
 
     [JsonIgnore]
     [Display(Name = "Role")]
@@ -31,15 +26,6 @@ public abstract class ItemModel : ModelBase
 
     [Display(Name = "Items")]
     public virtual ICollection<Item> Items { get; set; } = [];
-
-    [JsonIgnore]
-    public override bool IsNew => ItemModelId == 0;
-
-    [JsonIgnore]
-    public override int IdentificationId { get => ItemModelId; }
-
-    [JsonIgnore]
-    public override string? IdentificationName { get => Description; }
 }
 
 public partial class ItemModelItem : ItemModel
